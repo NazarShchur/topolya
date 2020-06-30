@@ -11,6 +11,6 @@ class Order extends Model
     public $timestamps = false;
 
     public function pavilion(){
-        return $this->hasOne("App\Model\Pavilion");
+        return $this->belongsTo("App\Model\Pavilion");
     }
 }

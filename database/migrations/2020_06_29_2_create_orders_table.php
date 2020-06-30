@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('pavilion_id')->unsigned();
             $table->integer('people_count');
             $table->boolean("is_closed");
+            $table->date("date");
 
             $table->foreign("pavilion_id")->references("id")->on("pavilions");
         });

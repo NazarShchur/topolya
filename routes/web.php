@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return "hi";
-});
+Route::get('/pavilions', 'PavilionController@getAll');
+
+Route::get('/pavilions/{id}', 'PavilionController@getById');
+
+Route::post('/createOrder', 'OrderController@createOrder');
+
+Route::get('/orders', 'OrderController@getAll');
