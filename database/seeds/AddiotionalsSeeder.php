@@ -35,7 +35,7 @@ class AddiotionalsSeeder extends Seeder
             'is_hourly'=> false
         ];
         $additionals[] = [
-            'name' => 'Кальян (чаша с табоком + 3 угля)',
+            'name' => 'Кальян (чаша с табаком + 3 угля)',
             'price' => 1000,
             'is_hourly'=> false
         ];

@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Model\Additional;
+use App\Model\AdditionalOrder;
 use App\Model\Order;
 use Illuminate\Http\Request;
 
@@ -25,4 +27,10 @@ class OrderController extends Controller
     public function getAll() {
         return view('orders', ['orders' => Order::all()]);
     }
+
+    public function getById($id){
+        return view("editOrder", ['order' => Order::all()->firstWhere('id', '=', $id), 'additionals' => Additional::all()]);
+    }
+
+
 }
