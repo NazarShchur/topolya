@@ -9,7 +9,8 @@
             <th scope="col">Номер</th>
             <th scope="col">Кол-во людей</th>
             <th scope="col">Беседка</th>
-            <th scope="col">Активность</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Статус</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{$order->contact_number}}</td>
                 <td>{{$order->people_count}}</td>
                 <td>{{$order->pavilion->name}}</td>
+                <td>{{$order->date}}</td>
                 <td>
                     @if($order->is_closed == 0)
                         <span style="color: red">Не оплачено</span>
@@ -27,12 +29,9 @@
                     @endif
                 </td>
                 <td>
-                    <form method="post">
-                        <input type="hidden" value="{{$order->id}}">
-                        <button type="submit">
-                            Редактировать
-                        </button>
-                    </form>
+                    <a href="{{url("/orders/$order->id")}}">
+                        Редактировать
+                    </a>
                 </td>
             </tr>
         @endforeach

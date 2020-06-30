@@ -13,4 +13,8 @@ class Order extends Model
     public function pavilion(){
         return $this->belongsTo("App\Model\Pavilion");
     }
+
+    public function additional_orders(){
+        return $this->hasMany("App\Model\AdditionalOrder");
+    }
 }

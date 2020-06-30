@@ -16,9 +16,10 @@ class CreateAdditionalOrdersTable extends Migration
         Schema::create('additional_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('additional_id')->unsigned();
-            $table->dateTime("start_time", 5)->nullable(true);
-            $table->dateTime("end_time", 5)->nullable(true);
+            $table->dateTime("start_time")->nullable(true);
+            $table->dateTime("end_time")->nullable(true);
             $table->bigInteger("order_id")->unsigned();
+            $table->boolean('is_closed');
 
             $table->foreign('additional_id')->references('id')->on('additionals');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

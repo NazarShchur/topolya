@@ -11,7 +11,7 @@ class AdditionalOrder extends Model
     public $timestamps = false;
 
     public function additional(){
-        return $this->hasOne("App\Model\Additional");
+        return $this->belongsTo("App\Model\Additional");
     }
 
     public function order(){
