@@ -24,11 +24,19 @@ Route::middleware('can:admin')->group(function (){
     Route::prefix('admin')->group(function (){
         Route::get('/orders', 'admin\AdminController@getAllOrders');
 
-        Route::get('/orders/{id}', 'admin\AdminController@getOrderById');
+        Route::get('/orders/{id}', 'admin\AdminController@getOrderById')->name('order');
 
         Route::post('/addAdditional', 'admin\AdminController@addAdditional');
 
         Route::post('/closeHourly', 'admin\AdminController@closeHourlyAdditional');
+
+        Route::get('/editPavilions', 'admin\AdminController@getPavilions');
+
+        Route::put('/editPavilions', 'admin\AdminController@editPavilion')->name('editPavilion');
+
+        Route::post('/editPavilions', 'admin\AdminController@addPavilion')->name('addPavilion');
+
+        Route::delete('/editPavilions', 'admin\AdminController@deletePavilion')->name('deletePavilion');
     });
 });
 
