@@ -22,21 +22,21 @@ Route::post('/createOrder', 'OrderController@createOrder');
 
 Route::middleware('can:admin')->group(function (){
     Route::prefix('admin')->group(function (){
-        Route::get('/orders', 'admin\AdminController@getAllOrders');
+        Route::get('/orders', 'admin\AdminOrderController@getAllOrders');
 
-        Route::get('/orders/{id}', 'admin\AdminController@getOrderById')->name('order');
+        Route::get('/orders/{id}', 'admin\AdminOrderController@getOrderById')->name('order');
 
-        Route::post('/addAdditional', 'admin\AdminController@addAdditional');
+        Route::post('/addAdditional', 'admin\AdminAdditionalController@addAdditional');
 
-        Route::post('/closeHourly', 'admin\AdminController@closeHourlyAdditional');
+        Route::post('/closeHourly', 'admin\AdminAdditionalController@closeHourlyAdditional');
 
-        Route::get('/editPavilions', 'admin\AdminController@getPavilions');
+        Route::get('/editPavilions', 'admin\AdminPavilionController@getPavilions');
 
-        Route::put('/editPavilions', 'admin\AdminController@editPavilion')->name('editPavilion');
+        Route::put('/editPavilions', 'admin\AdminPavilionController@editPavilion')->name('editPavilion');
 
-        Route::post('/editPavilions', 'admin\AdminController@addPavilion')->name('addPavilion');
+        Route::post('/editPavilions', 'admin\AdminPavilionController@addPavilion')->name('addPavilion');
 
-        Route::delete('/editPavilions', 'admin\AdminController@deletePavilion')->name('deletePavilion');
+        Route::delete('/editPavilions', 'admin\AdminPavilionController@deletePavilion')->name('deletePavilion');
     });
 });
 
