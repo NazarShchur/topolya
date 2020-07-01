@@ -24,13 +24,4 @@ class OrderController extends Controller
         return view('pavilions');
     }
 
-    public function getAll() {
-        return view('orders', ['orders' => Order::all()]);
-    }
-
-    public function getById($id){
-        return view("editOrder", ['order' => Order::all()->firstWhere('id', '=', $id), 'additionals' => Additional::all()]);
-    }
-
-
 }

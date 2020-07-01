@@ -22,13 +22,13 @@ Route::post('/createOrder', 'OrderController@createOrder');
 
 
 Route::prefix('admin')->group(function (){
-    Route::get('/orders', 'OrderController@getAll');
+    Route::get('/orders', 'AdminController@getAllOrders');
 
-    Route::get('/orders/{id}', 'OrderController@getById');
+    Route::get('/orders/{id}', 'AdminController@getOrderById');
 
-    Route::post('/addAdditional', 'AdditionalOrderController@addAdditional');
+    Route::post('/addAdditional', 'AdminController@addAdditional');
 
-    Route::post('/closeHourly', 'AdditionalOrderController@closeHourly');
+    Route::post('/closeHourly', 'AdminController@closeHourlyAdditional');
 });
 
 Auth::routes();
