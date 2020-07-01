@@ -18,6 +18,7 @@ class CreateAdditionalsTable extends Migration
             $table->string("name");
             $table->boolean("is_hourly");
             $table->double("price");
+            $table->boolean("is_active");
         });
     }
 

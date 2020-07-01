@@ -29,7 +29,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{url("/orders/$order->id")}}">
+                    <a href="{{route('order', $order->id)}}">
                         Редактировать
                     </a>
                 </td>
