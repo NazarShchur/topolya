@@ -59,27 +59,4 @@
         <button type="submit">Сохранить</button>
     </form>
 @endsection
-{{--<table class="table table-striped">--}}
-{{--    <thead>--}}
-{{--    <tr>--}}
-{{--        <th scope="col">Услуга</th>--}}
-{{--        <th scope="col">Цена</th>--}}
-{{--        <th scope="col">Тип</th>--}}
-{{--    </tr>--}}
-{{--    </thead>--}}
-{{--    <tbody>--}}
-{{--    @foreach($additionals as $add)--}}
-{{--        <tr>--}}
-{{--            <td>{{$add->name}}</td>--}}
-{{--            <td>{{$add->price}}</td>--}}
-{{--            <td>--}}
-{{--                @if($add->is_hourly == 1)--}}
-{{--                    Почасовая--}}
-{{--                @else--}}
-{{--                    Фикс--}}
-{{--                @endif--}}
-{{--            </td>--}}
-{{--        </tr>--}}
-{{--    @endforeach--}}
-{{--    </tbody>--}}
-{{--</table>--}}
+

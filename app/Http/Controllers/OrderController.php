@@ -21,7 +21,7 @@ class OrderController extends Controller
         $order->pavilion_id = $request->pavilion_id;
         $order->save();
 
-        return view('pavilions');
+        return back();
     }
 
 }

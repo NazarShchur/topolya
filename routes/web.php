@@ -37,6 +37,14 @@ Route::middleware('can:admin')->group(function (){
         Route::post('/editPavilions', 'admin\AdminPavilionController@addPavilion')->name('addPavilion');
 
         Route::delete('/editPavilions', 'admin\AdminPavilionController@deletePavilion')->name('deletePavilion');
+
+        Route::get('/editAdds', 'admin\AdminAdditionalController@getAdditionals')->name('getAdditionals');
+
+        Route::put('/editAdds', 'admin\AdminAdditionalController@editAdditional')->name('editAdditional');
+
+        Route::post('/editAdds', 'admin\AdminAdditionalController@createAdditional');
+
+        Route::delete('/editAdds', 'admin\AdminAdditionalController@deleteAdditional');
     });
 });
 

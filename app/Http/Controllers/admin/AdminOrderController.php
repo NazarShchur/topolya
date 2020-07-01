@@ -15,7 +15,7 @@ class AdminOrderController extends Controller
     }
 
     public function getOrderById($id){
-        return view("admin.editOrder", ['order' => Order::all()->firstWhere('id', '=', $id), 'additionals' => Additional::all()]);
+        return view("admin.editOrder", ['order' => Order::all()->firstWhere('id', '=', $id), 'additionals' => Additional::all()->where('is_active', '=', true)]);
     }
 
 }
