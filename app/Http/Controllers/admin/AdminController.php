@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        //$this->middleware('auth');
+    }
+
     public function getAllOrders() {
         return view('orders', ['orders' => Order::all()]);
     }

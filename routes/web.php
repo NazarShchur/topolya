@@ -20,16 +20,18 @@ Route::get('/pavilions/{id}', 'PavilionController@getById');
 Route::post('/createOrder', 'OrderController@createOrder');
 
 
+Route::middleware('can:admin')->group(function (){
+    Route::prefix('admin')->group(function (){
+        Route::get('/orders', 'admin\AdminController@getAllOrders');
 
-Route::prefix('admin')->group(function (){
-    Route::get('/orders', 'AdminController@getAllOrders');
+        Route::get('/orders/{id}', 'admin\AdminController@getOrderById');
 
-    Route::get('/orders/{id}', 'AdminController@getOrderById');
+        Route::post('/addAdditional', 'admin\AdminController@addAdditional');
 
-    Route::post('/addAdditional', 'AdminController@addAdditional');
-
-    Route::post('/closeHourly', 'AdminController@closeHourlyAdditional');
+        Route::post('/closeHourly', 'admin\AdminController@closeHourlyAdditional');
+    });
 });
+
 
 Auth::routes();
 

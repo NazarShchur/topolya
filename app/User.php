@@ -13,7 +13,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'username', 'password',
+        'username', 'password', 'role'
     ];
 
     protected $hidden = [
@@ -21,6 +21,6 @@ class User extends Authenticatable
     ];
 
     public function role(){
-
+        $this->belongsTo('App\Model\Role');
     }
 }
