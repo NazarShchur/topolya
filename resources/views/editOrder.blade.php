@@ -21,7 +21,7 @@
                 <td>
                     @if($add->additional->is_hourly == 1)
                         @if(is_null($add->end_time))
-                            <form method="post" action="{{url('/closeHourly')}}">
+                            <form method="post" action="{{url('admin/closeHourly')}}">
                                 @csrf
                                 <input type="datetime-local" name='end_time' required>
                                 <input type="hidden" name="additional_order_id" value="{{$add->id}}">
@@ -65,7 +65,7 @@
                     @endif
                 </td>
                 <td>
-                    <form method="post" action="{{url('/addAdditional')}}">
+                    <form method="post" action="{{url('admin/addAdditional')}}">
                         @csrf
                         @if($add->is_hourly == 1)
                             <input type="datetime-local" name='start_time' required>

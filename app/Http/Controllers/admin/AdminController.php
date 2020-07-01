@@ -34,7 +34,7 @@ class AdminController extends Controller
         $add_order->start_time = $request->start_time;
         $add_order->is_closed = false;
         $add_order->save();
-        return redirect("/orders/$request->order_id");
+        return back();
     }
 
     public function closeHourlyAdditional(Request $request)

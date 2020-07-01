@@ -20,7 +20,7 @@ Route::get('/pavilions/{id}', 'PavilionController@getById');
 Route::post('/createOrder', 'OrderController@createOrder');
 
 
-Route::middleware('can:admin')->group(function (){
+//Route::middleware('can:admin')->group(function (){
     Route::prefix('admin')->group(function (){
         Route::get('/orders', 'admin\AdminController@getAllOrders');
 
@@ -30,7 +30,7 @@ Route::middleware('can:admin')->group(function (){
 
         Route::post('/closeHourly', 'admin\AdminController@closeHourlyAdditional');
     });
-});
+//});
 
 
 Auth::routes();
