@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('people_count');
             $table->boolean("is_closed");
             $table->date("date");
+            $table->double('payed')->default(0);
 
             $table->foreign("pavilion_id")->references("id")->on("pavilions");
         });
