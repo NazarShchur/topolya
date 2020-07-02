@@ -15,7 +15,7 @@ class CreatePavilionsTable extends Migration
     {
         Schema::create('pavilions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("name");
+            $table->string("name")->unique();
             $table->integer("places_count");
             $table->double("price");
 

@@ -7,6 +7,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Model\Additional;
 use App\Model\Pavilion;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class AdminPavilionController extends Controller
@@ -30,7 +31,11 @@ class AdminPavilionController extends Controller
         $pavilion->name = $request->name;
         $pavilion->price = $request->price;
         $pavilion->places_count = $request->places_count;
-        $pavilion->save();
+        try {
+            $pavilion->save();
+        } catch (QueryException $e){
+            return back()->withErrors(['error'=>"Беседка с именем $pavilion->name уже существует"]);
+        }
         return back();
     }
 

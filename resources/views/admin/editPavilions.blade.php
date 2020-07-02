@@ -45,7 +45,7 @@
     <form method="post">
         @csrf
         <label>
-            Название
+            Название @if($errors->any())<span style="color: red">{{$errors->first()}}</span>@endif
             <input type="text" name="name" required>
         </label>
         <label>
@@ -58,5 +58,6 @@
         </label>
         <button type="submit">Сохранить</button>
     </form>
+
 @endsection
 
