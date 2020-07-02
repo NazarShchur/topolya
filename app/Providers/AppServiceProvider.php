@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Model\AdditionalOrder;
+use App\Model\Order;
+use App\Model\Pavilion;
+use App\Observers\AdditionalOrderObserver;
+use App\Observers\PavilionObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

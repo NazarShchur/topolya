@@ -18,6 +18,10 @@ class AdminAdditionalController extends Controller
         $add_order->order_id = $request->order_id;
         $add_order->start_time = $request->start_time;
         $add_order->is_closed = false;
+        $add = $add_order->additional()->first();
+        if(!$add->is_hourly){
+            $add_order->to_pay = $add->price;
+        }
         $add_order->save();
         return back();
     }
@@ -26,7 +30,26 @@ class AdminAdditionalController extends Controller
     {
         $add_order = AdditionalOrder::all()->firstWhere('id', '=', $request->additional_order_id);
         $add_order->end_time = $request->end_time;
+
+        $time_diff = $add_order->start_time->diffInMinutes($add_order->end_time);
+
+        $to_pay = $time_diff * ($add_order->additional()->first()->price / 60.0);
+
+        $add_order->to_pay = round($to_pay, 2);
+
         $add_order->save();
+        return back();
+    }
+
+    public function turnIsPayedAddOrder(Request $request){
+        $add_order = AdditionalOrder::all()->firstWhere('id', '=', $request->id);
+        $add_order->is_closed = !$add_order->is_closed;
+        $add_order->save();
+        return back();
+    }
+
+    public function deleteAddOrder(Request $request){
+        AdditionalOrder::all()->firstWhere('id', '=', $request->id)->delete();
         return back();
     }
 

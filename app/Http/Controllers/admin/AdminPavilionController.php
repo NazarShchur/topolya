@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Model\Additional;
 use App\Model\Pavilion;
 use Illuminate\Http\Request;
 

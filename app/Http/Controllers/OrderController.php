@@ -21,6 +21,9 @@ class OrderController extends Controller
         $order->pavilion_id = $request->pavilion_id;
         $order->save();
 
+        $add_order = new AdditionalOrder();
+
+
         return back();
     }
 

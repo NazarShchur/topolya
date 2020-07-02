@@ -20,11 +20,17 @@ Route::get('/pavilions/{id}', 'PavilionController@getById');
 Route::post('/createOrder', 'OrderController@createOrder');
 
 
-Route::middleware('can:admin')->group(function (){
-    Route::prefix('admin')->group(function (){
+Route::middleware('can:admin')->group(function () {
+    Route::prefix('admin')->group(function () {
         Route::get('/orders', 'admin\AdminOrderController@getAllOrders');
 
         Route::get('/orders/{id}', 'admin\AdminOrderController@getOrderById')->name('order');
+
+        Route::patch('/orders/{id}', 'admin\AdminAdditionalController@turnIsPayedAddOrder');
+
+        Route::delete('/orders/{id}', 'admin\AdminAdditionalController@deleteAddOrder');
+
+        Route::post('/orders/{id}', 'admin\AdminOrderController@closeOrder');
 
         Route::post('/addAdditional', 'admin\AdminAdditionalController@addAdditional');
 
@@ -45,6 +51,8 @@ Route::middleware('can:admin')->group(function (){
         Route::post('/editAdds', 'admin\AdminAdditionalController@createAdditional');
 
         Route::delete('/editAdds', 'admin\AdminAdditionalController@deleteAdditional');
+
+
     });
 });
 

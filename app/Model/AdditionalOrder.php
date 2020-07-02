@@ -10,6 +10,8 @@ class AdditionalOrder extends Model
 {
     public $timestamps = false;
 
+    protected $dates = ['start_time', 'end_time'];
+
     public function additional(){
         return $this->belongsTo("App\Model\Additional");
     }

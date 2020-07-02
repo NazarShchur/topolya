@@ -25,7 +25,7 @@
                     @if($order->is_closed == 0)
                         <span style="color: red">Не оплачено</span>
                     @else
-                        <span style="color: green">Олачено</span>
+                        <span style="color: green">Оплачено</span>
                     @endif
                 </td>
                 <td>
