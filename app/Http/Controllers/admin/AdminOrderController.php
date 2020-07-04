@@ -26,14 +26,14 @@ class AdminOrderController extends Controller
         ]);
     }
 
-    public function closeOrder($id){
+    public function payAll($id){
         $order = Order::all()->firstWhere('id', '=', $id);
-        $order->is_closed = true;
-        $order->save();
 
         foreach ($order->additional_orders()->get() as $add){
-            $add->is_closed = true;
-            $add->save();
+            if($add->to_pay > 0){
+                $add->is_closed = true;
+                $add->save();
+            }
         }
         return back();
     }

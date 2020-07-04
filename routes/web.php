@@ -30,7 +30,7 @@ Route::middleware('can:admin')->group(function () {
 
         Route::delete('/orders/{id}', 'admin\AdminAdditionalController@deleteAddOrder');
 
-        Route::post('/orders/{id}', 'admin\AdminOrderController@closeOrder');
+        Route::post('/orders/{id}', 'admin\AdminOrderController@payAll');
 
         Route::post('/addAdditional', 'admin\AdminAdditionalController@addAdditional');
 

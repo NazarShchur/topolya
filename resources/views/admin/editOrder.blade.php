@@ -64,7 +64,7 @@
                             <button type="submit">Удалить</button>
                         </form>
                     </td>
-                @elseif(!$order->is_closed)
+                @else
                     <td>
                         <form method="post">
                             @csrf
@@ -88,14 +88,13 @@
                 <td>
                     <form method="post">
                         @csrf
-                        <button type="submit">Закрыть заказ</button>
+                        <button type="submit">Оплатить все</button>
                     </form>
                 </td>
             @endif
         </tr>
         </tbody>
     </table>
-    @if(!$order->is_closed)
         <h2>Доп услуги</h2>
         <table class="table table-striped">
             <thead>
@@ -132,7 +131,6 @@
             @endforeach
             </tbody>
         </table>
-    @endif
 
 
 @endsection
