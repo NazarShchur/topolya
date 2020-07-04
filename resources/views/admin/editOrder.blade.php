@@ -26,7 +26,7 @@
                         @if(is_null($add->end_time))
                             <form method="post" action="{{url('admin/closeHourly')}}">
                                 @csrf
-                                <input type="time" name='end_time' required>
+                                <input type="time" name='end_time' value="{{$now}}" required>
                                 <input type="hidden" name="additional_order_id" value="{{$add->id}}">
                                 <button type="submit">Закрыть</button>
                             </form>
@@ -47,12 +47,14 @@
                 </td>
                 @if($add->is_closed == 0)
                     <td>
-                        <form method="post">
-                            @csrf
-                            @method('patch')
-                            <input type="hidden" name="id" value="{{$add->id}}">
-                            <button type="submit">Оплатить</button>
-                        </form>
+                        @if($add->to_pay > 0)
+                            <form method="post">
+                                @csrf
+                                @method('patch')
+                                <input type="hidden" name="id" value="{{$add->id}}">
+                                <button type="submit">Оплатить</button>
+                            </form>
+                        @endif
                     </td>
                     <td>
                         <form method="post">
@@ -94,42 +96,42 @@
         </tbody>
     </table>
     @if(!$order->is_closed)
-    <h2>Доп услуги</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Услуга</th>
-            <th scope="col">Цена</th>
-            <th scope="col">Тип</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($additionals as $add)
+        <h2>Доп услуги</h2>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{$add->name}}</td>
-                <td>{{$add->price}}</td>
-                <td>
-                    @if($add->is_hourly == 1)
-                        Почасовая
-                    @else
-                        Фикс
-                    @endif
-                </td>
-                <td>
-                    <form method="post" action="{{url('admin/addAdditional')}}">
-                        @csrf
-                        @if($add->is_hourly == 1)
-                            <input type="time" name='start_time' required>
-                        @endif
-                        <input type="hidden" name="order_id" value="{{$order->id}}">
-                        <input type="hidden" name="additional_id" value="{{$add->id}}">
-                        <button type="submit">Добавить к заказу</button>
-                    </form>
-                </td>
+                <th scope="col">Услуга</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Тип</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($additionals as $add)
+                <tr>
+                    <td>{{$add->name}}</td>
+                    <td>{{$add->price}}</td>
+                    <td>
+                        @if($add->is_hourly == 1)
+                            Почасовая
+                        @else
+                            Фикс
+                        @endif
+                    </td>
+                    <td>
+                        <form method="post" action="{{url('admin/addAdditional')}}">
+                            @csrf
+                            @if($add->is_hourly == 1)
+                                <input type="time" name='start_time' value="{{$now}}" required>
+                            @endif
+                            <input type="hidden" name="order_id" value="{{$order->id}}">
+                            <input type="hidden" name="additional_id" value="{{$add->id}}">
+                            <button type="submit">Добавить к заказу</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     @endif
 
 

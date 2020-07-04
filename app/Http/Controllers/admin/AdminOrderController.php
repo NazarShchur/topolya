@@ -7,6 +7,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Model\Additional;
 use App\Model\Order;
+use Carbon\Carbon;
 
 class AdminOrderController extends Controller
 {
@@ -20,7 +21,8 @@ class AdminOrderController extends Controller
             'order' => $order,
             'additionals' => Additional::all()->where('is_active', '=', true),
             'to_pay' => $this->orderToPay($order),
-            'payed' => $this->orderPayed($order)
+            'payed' => $this->orderPayed($order),
+            'now' => $this->currentTimeMoscow()
         ]);
     }
 
@@ -54,6 +56,10 @@ class AdminOrderController extends Controller
             }
         }
         return $payed;
+    }
+
+    private function currentTimeMoscow(){
+        return Carbon::now('Europe/Moscow')->format('H:i');
     }
 
 }
