@@ -20,11 +20,18 @@ class OrderController extends Controller
         $order->date = $request->date;
         $order->pavilion_id = $request->pavilion_id;
         $order->save();
-
-        $add_order = new AdditionalOrder();
-
-
+        $this->createAdditionalOrderForGivenPavilion($order);
         return back();
+    }
+
+    private function createAdditionalOrderForGivenPavilion(Order $order){
+        $pavilion = $order->pavilion()->first();
+        $add_order = new AdditionalOrder();
+        $add_order->is_closed = false;
+        $add_order->to_pay = $pavilion->price;
+        $add_order->order_id = $order->id;
+        $add_order->additional_id = Additional::all()->firstWhere('name', '=', $pavilion->name)->id;
+        $add_order->save();
     }
 
 }
