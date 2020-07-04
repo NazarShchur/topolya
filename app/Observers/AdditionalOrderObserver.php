@@ -28,14 +28,14 @@ class AdditionalOrderObserver
     public function updated(AdditionalOrder $additionalOrder)
     {
         $order = $additionalOrder->order()->first();
-        $is_payed = true;
-        foreach ($order->additional_orders() as $add){
+        $is_closed = true;
+        foreach ($order->additional_orders()->get() as $add){
             if(!$add->is_closed){
-                $is_payed = false;
+                $is_closed = false;
                 break;
             }
         }
-        $order->is_closed = $is_payed;
+        $order->is_closed = $is_closed;
         $order->save();
     }
 
@@ -47,7 +47,16 @@ class AdditionalOrderObserver
      */
     public function deleted(AdditionalOrder $additionalOrder)
     {
-        //
+        $order = $additionalOrder->order()->first();
+        $is_closed = true;
+        foreach ($order->additional_orders()->get() as $add){
+            if(!$add->is_closed){
+                $is_closed = false;
+                break;
+            }
+        }
+        $order->is_closed = $is_closed;
+        $order->save();
     }
 
     /**

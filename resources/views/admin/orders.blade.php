@@ -22,7 +22,7 @@
                 <td>{{$order->pavilion->name}}</td>
                 <td>{{$order->date}}</td>
                 <td>
-                    @if($order->is_closed == 0)
+                    @if(!$order->is_closed)
                         <span style="color: red">Не оплачено</span>
                     @else
                         <span style="color: green">Оплачено</span>
