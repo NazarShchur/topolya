@@ -22,7 +22,9 @@ Route::post('/createOrder', 'OrderController@createOrder');
 
 Route::middleware('can:admin')->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/orders', 'admin\AdminOrderController@getAllOrders');
+        Route::get('/calendar', 'admin\AdminOrderController@getAllOrdersCalendar');
+
+        Route::get('/orders', 'admin\AdminOrderController@getAllOrdersPaginated');
 
         Route::get('/orders/{id}', 'admin\AdminOrderController@getOrderById')->name('order');
 

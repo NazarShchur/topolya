@@ -11,8 +11,17 @@ use Carbon\Carbon;
 
 class AdminOrderController extends Controller
 {
-    public function getAllOrders() {
+    public function getAllOrdersPaginated() {
         return view('admin.orders', ['orders' => Order::paginate(2)]);
+    }
+
+    public function getAllOrdersCalendar() {
+        $orders = Order::all();
+        $calendar = [];
+        foreach ($orders as $order){
+                $calendar[$order->date][] = $order;
+        }
+        return view('admin.calendar', ['calendar' => $calendar]);
     }
 
     public function getOrderById($id){
