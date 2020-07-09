@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="col-lg-12 p-4 text-center">
-    <h1>Header</h1>
+    Меню: <a href="admin/editPavilions">Беседки</a>, <a href="admin/editAdds">Допы</a>
 </div>
 <div class="container content">
     @yield('content')
