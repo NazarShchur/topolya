@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class AdminOrderController extends Controller
 {
     public function getAllOrders() {
-        return view('admin.orders', ['orders' => Order::all()]);
+        return view('admin.orders', ['orders' => Order::paginate(2)]);
     }
 
     public function getOrderById($id){

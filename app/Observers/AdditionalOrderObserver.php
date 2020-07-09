@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Model\AdditionalOrder;
+use App\Model\Order;
 
 class AdditionalOrderObserver
 {
