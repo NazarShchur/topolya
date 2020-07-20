@@ -8,6 +8,7 @@ use App\Model\Additional;
 use App\Model\AdditionalOrder;
 use App\Model\Order;
 use App\Model\Pavilion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -53,41 +54,45 @@ class OrderController extends Controller
 
     public function getAllOrdersCalendar(Request $request)
     {
-        $orders = $this->getOrdersForGivenDate($request->date);
+        $date = is_null($request->date) ? Carbon::now()->format('Y-m') : $request->date;
+
+        $orders = $this->getOrdersForGivenDate($date);
 
         $fullOccupied = [];
         $halfOccupied = [];
 
         $countOfPavilions = Pavilion::all()->count();
 
-        $dates = $orders->map(function (Order $order){
+        $dates = $orders->map(function (Order $order) {
             return $order->date->format('Y-m-d');
         })->toArray();
 
         $counts = array_count_values($dates);
-        foreach ($counts as $key => $value){
-            if ($value == $countOfPavilions && !in_array($key, $fullOccupied)){
+        foreach ($counts as $key => $value) {
+            if ($value == $countOfPavilions && !in_array($key, $fullOccupied)) {
                 $fullOccupied[] = $key;
-            } else if(!in_array($key, $fullOccupied)){
+            } else if (!in_array($key, $fullOccupied)) {
                 $halfOccupied[] = $key;
             }
         }
 
-        return view('admin.calendar', ['fullOccupied' => $fullOccupied, 'halfOccupied' => $halfOccupied]);
+        return view('admin.calendar', ['fullOccupied' => $fullOccupied, 'halfOccupied' => $halfOccupied, 'date' => $date]);
     }
 
-    private function getOrdersForGivenDate($date){
+    private function getOrdersForGivenDate($date)
+    {
         $date = $this->parseDate($date);
         $orders = Order::all();
         foreach ($orders as $key => $order) {
-            if ($order->date->month != $date['month'] || $order->date->year != $date['year'] ) {
+            if ($order->date->month != $date['month'] || $order->date->year != $date['year']) {
                 $orders->forget($key);
             }
         }
         return $orders;
     }
 
-    private function parseDate($date){
+    private function parseDate($date)
+    {
         $exp = explode('-', $date);
         return ['year' => $exp[0], 'month' => $exp[1]];
     }
