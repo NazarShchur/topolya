@@ -62,11 +62,10 @@ class OrderController extends Controller
         $countOfPavilions = Pavilion::all()->count();
 
         $dates = $orders->map(function (Order $order){
-            return $order->date->format('Y-d-m');
+            return $order->date->format('Y-m-d');
         })->toArray();
 
         $counts = array_count_values($dates);
-
         foreach ($counts as $key => $value){
             if ($value == $countOfPavilions && !in_array($key, $fullOccupied)){
                 $fullOccupied[] = $key;
