@@ -19,11 +19,10 @@ Route::get('/pavilions/{id}', 'PavilionController@getById');
 
 Route::post('/createOrder', 'OrderController@createOrder');
 
+Route::get('/calendar', 'OrderController@getAllOrdersCalendar');
 
 Route::middleware('can:admin')->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/calendar', 'admin\AdminOrderController@getAllOrdersCalendar');
-
         Route::get('/orders', 'admin\AdminOrderController@getAllOrdersPaginated');
 
         Route::get('/orders/{id}', 'admin\AdminOrderController@getOrderById')->name('order');

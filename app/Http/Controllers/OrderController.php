@@ -19,9 +19,13 @@ class OrderController extends Controller
         $order->is_closed = false;
         $order->date = $request->date;
         $order->pavilion_id = $request->pavilion_id;
-        $order->save();
-        $this->createAdditionalOrderForGivenPavilion($order);
-        return back();
+        if($this->validateOrder($order)){
+            $order->save();
+            $this->createAdditionalOrderForGivenPavilion($order);
+            return back();
+        } else {
+            return back()->withErrors(['error'=>"Беседка занята для даты $order->date"]);
+        }
     }
 
     private function createAdditionalOrderForGivenPavilion(Order $order){
@@ -32,6 +36,28 @@ class OrderController extends Controller
         $add_order->order_id = $order->id;
         $add_order->additional_id = Additional::all()->firstWhere('name', '=', $pavilion->name)->id;
         $add_order->save();
+    }
+
+    private function validateOrder(Order $order) {
+        $orders = Order::all()->where('pavilion_id', '=', $order->pavilion_id);
+        $dates = [];
+        foreach($orders as $ord){
+            $dates[] = $ord->date;
+        }
+        return !in_array($order->date, $dates);
+    }
+
+    public function getAllOrdersCalendar() {
+        return view('admin.calendar', ['calendar' => $this->ejectDates()]);
+    }
+
+    private function ejectDates() {
+        $orders = Order::all();
+        $calendar = [];
+        foreach ($orders as $order){
+            $calendar[$order->date][] = $order;
+        }
+        return $calendar;
     }
 
 }

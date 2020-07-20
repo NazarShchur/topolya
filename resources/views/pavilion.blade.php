@@ -9,16 +9,13 @@
         <div class="col-lg-6">
             <p>Цена - {{$pavilion->price}}</p>
             <p>Максимум мест - {{$pavilion->places_count}}</p>
-            @if(!is_null($pavilion->orders))
-                <p>Занятые даты </p>
-                @foreach($pavilion->orders as $order)
-                    <p>{{$order->date}}</p>
-                @endforeach
-            @endif
             <form method="post" action="{{url("/createOrder")}}">
                 @csrf
                 <label class="col-lg-12">Ваше имя <input type="text" name="name" placeholder="Ваше имя"></label>
-                <label class="col-lg-12">Дата <input type="date" name="date"></label>
+                @if($errors->any())<span style="color: red">{{$errors->first()}}</span>@endif
+                <label class="col-lg-12">
+                    Дата <input type="date" name="date">
+                </label>
                 <label class="col-lg-12">Номер телефона <input type="number" name="phone" placeholder="Номер телефона"></label>
                 <label class="col-lg-12">Количество людей <input type="number" name="people_count"  placeholder="Количество людей"></label>
                 <input type="hidden" name="pavilion_id" value="{{$pavilion->id}}">
