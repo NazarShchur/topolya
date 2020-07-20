@@ -34,4 +34,21 @@ class OrderController extends Controller
         $add_order->save();
     }
 
+//    private function validate(Order $order) {
+//
+//    }
+
+    public function getAllOrdersCalendar() {
+        return view('admin.calendar', ['calendar' => $this->ejectDates()]);
+    }
+
+    private function ejectDates() {
+        $orders = Order::all();
+        $calendar = [];
+        foreach ($orders as $order){
+            $calendar[$order->date][] = $order;
+        }
+        return $calendar;
+    }
+
 }
