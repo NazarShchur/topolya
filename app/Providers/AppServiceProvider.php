@@ -29,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         AdditionalOrder::observe(AdditionalOrderObserver::class);
+        Pavilion::observe(PavilionObserver::class);
     }
 }

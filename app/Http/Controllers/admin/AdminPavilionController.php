@@ -37,7 +37,7 @@ class AdminPavilionController extends Controller
         } catch (QueryException $e){
             return back()->withErrors(['error'=>"Беседка с именем $pavilion->name уже существует"]);
         }
-        $this->createAdditionalPavilion($pavilion);
+
         return back();
     }
 
@@ -45,14 +45,5 @@ class AdminPavilionController extends Controller
         $pavilion = Pavilion::all()->firstWhere('id', '=', $request->pavilion_id);
         $pavilion->delete();
         return back();
-    }
-
-    private function createAdditionalPavilion($pavilion){
-        $add = new Additional();
-        $add->name = $pavilion->name;
-        $add->is_hourly = false;
-        $add->price = $pavilion->price;
-        $add->is_active = false;
-        $add->save();
     }
 }
