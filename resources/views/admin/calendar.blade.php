@@ -1,22 +1,12 @@
 @extends("main")
 @section('title', "Calendar")
 @section('content')
-
-    Полностью заняты
-    @foreach($fullOccupied as $date)
-        {{$date}}
-    @endforeach
-    Частично заняты
-    @foreach($halfOccupied as $date)
-        {{$date}}
-    @endforeach
-
 <div id="my-calendar"></div>
-
+{{app('request')->input('date')}}
 <script>
     const myCalendar = new TavoCalendar('#my-calendar', {
         locale: "ru",
-        date: "2020-7-21",
+        date: '2020-07',
         range_select: false,
         highlight: @json($halfOccupied),
         blacklist: @json($fullOccupied),
@@ -26,6 +16,5 @@
         future_select: true,
         past_select: true
     })
-
 </script>
 @endsection

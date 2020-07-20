@@ -54,7 +54,7 @@ class OrderController extends Controller
 
     public function getAllOrdersCalendar(Request $request)
     {
-        $orders = $this->getOrdersForGivenMonth($request->month);
+        $orders = $this->getOrdersForGivenDate($request->date);
 
         $fullOccupied = [];
         $halfOccupied = [];
@@ -77,13 +77,19 @@ class OrderController extends Controller
         return view('admin.calendar', ['fullOccupied' => $fullOccupied, 'halfOccupied' => $halfOccupied]);
     }
 
-    private function getOrdersForGivenMonth($month){
+    private function getOrdersForGivenDate($date){
+        $date = $this->parseDate($date);
         $orders = Order::all();
         foreach ($orders as $key => $order) {
-            if ($order->date->month != $month) {
+            if ($order->date->month != $date['month'] || $order->date->year != $date['year'] ) {
                 $orders->forget($key);
             }
         }
         return $orders;
+    }
+
+    private function parseDate($date){
+        $exp = explode('-', $date);
+        return ['year' => $exp[0], 'month' => $exp[1]];
     }
 }
