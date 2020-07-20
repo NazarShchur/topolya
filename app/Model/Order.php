@@ -17,4 +17,6 @@ class Order extends Model
     public function additional_orders(){
         return $this->hasMany("App\Model\AdditionalOrder");
     }
+
+    protected $dates = ['date'];
 }

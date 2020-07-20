@@ -2,10 +2,14 @@
 @section('title', "Calendar")
 @section('content')
 
-{{--    @foreach($calendar['2020-07-16'] as $order)--}}
-{{--        {{$order}}--}}
-{{--        {{$order->pavilion()->first()}}--}}
-{{--    @endforeach--}}
+    Полностью заняты
+    @foreach($fullOccupied as $date)
+        {{$date}}
+    @endforeach
+    Частично заняты
+    @foreach($halfOccupied as $date)
+        {{$date}}
+    @endforeach
 
 <div id="my-calendar"></div>
 <script>
